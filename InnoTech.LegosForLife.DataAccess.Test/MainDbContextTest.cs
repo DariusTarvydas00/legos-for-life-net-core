@@ -22,5 +22,19 @@ namespace InnoTech.LegosForLife.DataAccess.Test
             var mockedDbContext = Create.MockedDbContextFor<MainDbContext>();
             Assert.True(mockedDbContext.Products is DbSet<ProductEntity>);
         }
+
+        [Fact]
+        public void DbContext_DbSets_MustHaveDbSetWithTypeUserEntity()
+        {
+            var mockedDbContext = Create.MockedDbContextFor<MainDbContext>();
+            Assert.True(mockedDbContext.Users is DbSet<UserEntity>);
+        }
+
+        [Fact]
+        public void DbContext_DbSets_MustHaveDbSetWithTypeAdminEntity()
+        {
+            var mockedDbContext = Create.MockedDbContextFor<MainDbContext>();
+            Assert.True(mockedDbContext.Admins is DbSet<AdminEntity>);
+        }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,47 +11,47 @@ using Xunit;
 
 namespace InnoTech.LegosForLife.DataAccess.Test.Repositories
 {
-    public class ProductRepositoryTest
+    public class UserRepositoryTest
     {
         [Fact]
-        public void ProductRepository_IsIProductRepository()
+        public void UserRepository_IsIUserRepository()
         {
             var fakeContext = Create.MockedDbContextFor<MainDbContext>();
-            var repository = new ProductRepository(fakeContext);
-            Assert.IsAssignableFrom<IProductRepository>(repository);
+            var repository = new UserRepository(fakeContext);
+            Assert.IsAssignableFrom<IUserRepository>(repository);
         }
         
         [Fact]
-        public void ProductRepository_WithNullDBContext_ThrowsInvalidDataException()
+        public void UserRepository_WithNullDBContext_ThrowsInvalidDataException()
         {
-            Assert.Throws<InvalidDataException>(() => new ProductRepository(null));
+            Assert.Throws<InvalidDataException>(() => new UserRepository(null));
         }
         
         [Fact]
-        public void ProductRepository_WithNullDBContext_ThrowsExceptionWithMessage()
+        public void UserRepository_WithNullDBContext_ThrowsExceptionWithMessage()
         {
             var exception = Assert
-                .Throws<InvalidDataException>(() => new ProductRepository(null));
-            Assert.Equal("Product Repository Must have a DBContext", exception.Message);
+                .Throws<InvalidDataException>(() => new UserRepository(null));
+            Assert.Equal("User Repository Must have a DBContext", exception.Message);
         }
         
         [Fact]
-        public void FindAll_GetAllProductsEntitiesInDBContext_AsAListOfProducts()
+        public void FindAll_GetAllUsersEntitiesInDBContext_AsAListOfUsers()
         {
             //Arrange
             var fakeContext = Create.MockedDbContextFor<MainDbContext>();
-            var repository = new ProductRepository(fakeContext);
-            var list = new List<ProductEntity>
+            var repository = new UserRepository(fakeContext);
+            var list = new List<UserEntity>
             {
-                new ProductEntity { Id = 1, Name = "Lego1" },
-                new ProductEntity { Id = 2, Name = "Lego2" },
-                new ProductEntity { Id = 3, Name = "Lego3" }
+                new UserEntity { Id = 1, Name = "User" },
+                new UserEntity { Id = 2, Name = "User2" },
+                new UserEntity { Id = 3, Name = "User3" }
             };
-            fakeContext.Set<ProductEntity>().AddRange(list);
+            fakeContext.Set<UserEntity>().AddRange(list);
             fakeContext.SaveChanges();
             
             var expectedList = list
-                .Select(pe => new Product
+                .Select(pe => new User
                 {
                     Id = pe.Id,
                     Name = pe.Name
@@ -67,9 +67,9 @@ namespace InnoTech.LegosForLife.DataAccess.Test.Repositories
         
     }
 
-    public partial class Comparer: IEqualityComparer<Product>
+    public partial class Comparer: IEqualityComparer<User>
     {
-        public bool Equals(Product x, Product y)
+        public bool Equals(User x, User y)
         {
             if (ReferenceEquals(x, y)) return true;
             if (ReferenceEquals(x, null)) return false;
@@ -78,7 +78,7 @@ namespace InnoTech.LegosForLife.DataAccess.Test.Repositories
             return x.Id == y.Id && x.Name == y.Name;
         }
 
-        public int GetHashCode(Product obj)
+        public int GetHashCode(User obj)
         {
             return HashCode.Combine(obj.Id, obj.Name);
         }
