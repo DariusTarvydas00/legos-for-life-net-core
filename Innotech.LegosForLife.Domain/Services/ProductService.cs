@@ -18,5 +18,11 @@ namespace InnoTech.LegosForLife.Domain.Services
         {
             return _productRepository.FindAll();
         }
+
+        public Product GetProductById(int id)
+        {
+            //throw new System.NotImplementedException();
+            return null;
+        }
     }
 }
