@@ -1,51 +1,52 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using InnoTech.LegosForLife.WebApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Xunit;
 using System.Reflection;
 using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
+using InnoTech.LegosForLife.WebApi.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Xunit;
 
 namespace InnoTech.LegosForLife.WebApi.Test.Controllers
 {
-    public class ProductControllerTest
+    public class UserControllerTest
     {
+        
         #region Controller Intialization
 
         [Fact]
-        public void ProductController_HasProductService_IsOfTypeControllerBase()
+        public void UserController_HasUserService_IsOfTypeControllerBase()
         {
-            var service = new Mock<IProductService>();
-            var controller = new ProductController(service.Object);
+            var service = new Mock<IUserService>();
+            var controller = new UserController(service.Object);
             Assert.IsAssignableFrom<ControllerBase>(controller);
         }
         
         [Fact]
-        public void ProductController_WithNullProductService_ThrowsInvalidDataException()
+        public void UserController_WithNullUserService_ThrowsInvalidDataException()
         {
             Assert.Throws<InvalidDataException>(
-                () => new ProductController(null)
+                () => new UserController(null)
             );
 
         }
         
         [Fact]
-        public void ProductController_WithNullProductRepository_ThrowsExceptionWithMessage()
+        public void UserController_WithNullUserRepository_ThrowsExceptionWithMessage()
         {
             var exception = Assert.Throws<InvalidDataException>(
-                () => new ProductController(null)
+                () => new UserController(null)
             );
-            Assert.Equal("ProductService Cannot Be Null",exception.Message);
+            Assert.Equal("UserService Cannot Be Null",exception.Message);
         }
         
         [Fact]
-        public void ProductController_UsesApiControllerAttribute()
+        public void UserController_UsesApiControllerAttribute()
         {
             //Arrange
-            var typeInfo = typeof(ProductController).GetTypeInfo();
+            var typeInfo = typeof(UserController).GetTypeInfo();
             var attr = typeInfo
                 .GetCustomAttributes()
                 .FirstOrDefault(a => a.GetType()
@@ -55,10 +56,10 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         }  
         
         [Fact]
-        public void ProductController_UsesRouteAttribute()
+        public void UserController_UsesRouteAttribute()
         {  
             //Arrange
-            var typeInfo = typeof(ProductController).GetTypeInfo();
+            var typeInfo = typeof(UserController).GetTypeInfo();
             var attr = typeInfo
                 .GetCustomAttributes()
                 .FirstOrDefault(a => a.GetType()
@@ -68,10 +69,10 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         }
         
         [Fact]
-        public void ProductController_UsesRouteAttribute_WithParamApiControllerNameRoute()
+        public void UserController_UsesRouteAttribute_WithParamApiControllerNameRoute()
         {  
             //Arrange
-            var typeInfo = typeof(ProductController).GetTypeInfo();
+            var typeInfo = typeof(UserController).GetTypeInfo();
             var attr = typeInfo
                 .GetCustomAttributes()
                 .FirstOrDefault(a => a.GetType()
@@ -86,9 +87,9 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         #region GetAll Method
 
         [Fact]
-        public void ProductController_HasGetAllMethod()
+        public void UserController_HasGetAllMethod()
         {
-            var method = typeof(ProductController)
+            var method = typeof(UserController)
                 .GetMethods().FirstOrDefault(m => "GetAll".Equals(m.Name));
             Assert.NotNull(method);
         }
@@ -96,23 +97,23 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         [Fact]
         public void GetAll_WithNoParams_IsPublic()
         {
-            var method = typeof(ProductController)
+            var method = typeof(UserController)
                 .GetMethods().FirstOrDefault(m => "GetAll".Equals(m.Name));
             Assert.True(method.IsPublic);
         }
         
         [Fact]
-        public void GetAll_WithNoParams_ReturnsListOfProductsInActionResult()
+        public void GetAll_WithNoParams_ReturnsListOfUsersInActionResult()
         {
-            var method = typeof(ProductController)
+            var method = typeof(UserController)
                 .GetMethods().FirstOrDefault(m => "GetAll".Equals(m.Name));
-            Assert.Equal(typeof(ActionResult<List<Product>>).FullName, method.ReturnType.FullName);
+            Assert.Equal(typeof(ActionResult<List<User>>).FullName, method.ReturnType.FullName);
         }
 
         [Fact]
         public void GetAll_WithNoParams_HasGetHttpAttribute()
         {
-            var methodInfo = typeof(ProductController)
+            var methodInfo = typeof(UserController)
                 .GetMethods()
                 .FirstOrDefault(m => m.Name == "GetAll");
             var attr = methodInfo.CustomAttributes
@@ -121,17 +122,17 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         }
         
         [Fact]
-        public void GetAll_CallsServicesGetProducts_Once()
+        public void GetAll_CallsServicesGetUsers_Once()
         {
             //Arrange
-            var mockService = new Mock<IProductService>();
-            var controller = new ProductController(mockService.Object);
+            var mockService = new Mock<IUserService>();
+            var controller = new UserController(mockService.Object);
             
             //Act
             controller.GetAll();
             
             //Assert
-            mockService.Verify(s => s.GetProducts(),Times.Once);
+            mockService.Verify(s => s.GetUsers(),Times.Once);
 
         }
 
@@ -145,5 +146,5 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         #endregion
         
     }
-}
 
+}
