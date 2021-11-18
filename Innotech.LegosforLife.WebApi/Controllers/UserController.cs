@@ -5,6 +5,7 @@ using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
 using InnoTech.LegosForLife.WebApi.DTOs.UserDtos;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 
 namespace InnoTech.LegosForLife.WebApi.Controllers
 {
@@ -71,6 +72,21 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 Id = dto.Id,
                 Name = dto.Name
             }));
+        }
+
+        [HttpDelete]
+        public ActionResult<DeleteUserDto> DeleteUserDto(int id)
+        {
+            var userDto = _userService.DeleteUser(id);
+            if (userDto is not null)
+            {
+                return Ok(new DeleteUserDto()
+                {
+                    Id = userDto.Id,
+                    Name = userDto.Name
+                });
+            }
+            return NotFound();
         }
 
     }

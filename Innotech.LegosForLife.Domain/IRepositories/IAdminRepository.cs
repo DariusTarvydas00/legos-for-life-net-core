@@ -9,5 +9,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
         Admin GetAdminById(int Id);
         Admin CreateNewAdmin(Admin admin);
         Admin UpdateAdmin(Admin admin);
+        Admin DeleteAdmin(int id);
     }
 }

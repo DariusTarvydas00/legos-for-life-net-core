@@ -10,5 +10,6 @@ namespace InnoTech.LegosForLife.Core.IServices
         User GetUserById(int id);
         User CreateNewUser(User userDto);
         User UpdateUser(User user);
+        User DeleteUser(int id);
     }
 }

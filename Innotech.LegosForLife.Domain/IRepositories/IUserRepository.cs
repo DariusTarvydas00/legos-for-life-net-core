@@ -9,5 +9,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
         User GetUserById(int Id);
         User CreateNewUser(User user);
         User UpdateUser(User user);
+        User DeleteUser(int id);
     }
 }

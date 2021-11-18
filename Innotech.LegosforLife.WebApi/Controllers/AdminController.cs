@@ -72,5 +72,20 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 Name = dto.Name
             }));
         }
+        
+        [HttpDelete]
+        public ActionResult<DeleteAdminDto> DeleteAdminDto(int id)
+        {
+            var adminDto = _adminService.DeleteAdmin(id);
+            if (adminDto is not null)
+            {
+                return Ok(new DeleteAdminDto()
+                {
+                    Id = adminDto.Id,
+                    Name = adminDto.Name
+                });
+            }
+            return NotFound();
+        }
     }
 }

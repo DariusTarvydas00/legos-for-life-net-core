@@ -64,5 +64,15 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 Name = entity.Name
             };
         }
+
+        public User DeleteUser(int id)
+        {
+            var entity = _ctx.Users.Remove(new UserEntity()
+            {
+                Id = id
+            }).Entity;
+            _ctx.SaveChanges();
+            return new User() {Id = entity.Id};
+        }
     }
 }

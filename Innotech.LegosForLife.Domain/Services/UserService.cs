@@ -34,5 +34,10 @@ namespace InnoTech.LegosForLife.Domain.Services
         {
             return _userRepository.UpdateUser(user);
         }
+
+        public User DeleteUser(int id)
+        {
+            return _userRepository.DeleteUser(id);
+        }
     }
 }
