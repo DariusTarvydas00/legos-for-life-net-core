@@ -27,9 +27,13 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 .ToList();
         }
 
-        public Product GetProductById(int Id)
+        public Product GetProductById(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Products.Select(pe => new Product()
+            {
+                Id = pe.Id,
+                Name = pe.Name
+            }).FirstOrDefault(product => product.Id == id);
         }
     }
 }

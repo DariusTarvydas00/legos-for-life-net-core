@@ -6,5 +6,7 @@ namespace InnoTech.LegosForLife.Core.IServices
     public interface IUserService
     {
         List<User> GetUsers();
+
+        User GetUserById(int id);
     }
 }

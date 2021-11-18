@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
+using InnoTech.LegosForLife.WebApi.DTOs.UserDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoTech.LegosForLife.WebApi.Controllers
@@ -21,6 +22,21 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
         public ActionResult<List<User>> GetAll()
         {
             return _userService.GetUsers();
+        }
+        
+        [HttpGet("{id}")]
+        public ActionResult<GetUserByIdDto> GetUserByIdDto(int id)
+        {
+            var user = _userService.GetUserById(id);
+            if (user is not null)
+            {
+                return Ok(new GetUserByIdDto()
+                {
+                    Id = user.Id,
+                    Name = user.Name
+                });
+            }
+            return NotFound();
         }
 
     }

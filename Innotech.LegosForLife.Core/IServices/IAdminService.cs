@@ -6,5 +6,7 @@ namespace InnoTech.LegosForLife.Core.IServices
     public interface IAdminService
     {
         List<Admin> GetAdmins();
+
+        Admin GetAdminById(int id);
     }
 }

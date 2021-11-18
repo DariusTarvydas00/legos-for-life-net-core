@@ -6,5 +6,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
     public interface IUserRepository
     {
         List<User> FindAll();
+        User GetUserById(int Id);
     }
 }

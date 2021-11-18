@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using Xunit;
 using System.Reflection;
 using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
+using InnoTech.LegosForLife.Domain.IRepositories;
 using Moq;
 
 namespace InnoTech.LegosForLife.WebApi.Test.Controllers
@@ -134,13 +136,27 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
             mockService.Verify(s => s.GetProducts(),Times.Once);
 
         }
+        
+        [Fact]
+        public void GetProductById_WithNotExistingItem_ReturnsNotFound()
+        {
+            //Arrange
+            var mockService = new Mock<IProductService>();
+            var controller = new ProductController(mockService.Object);
+            mockService.Setup(r => r.GetProductById(It.IsAny<int>()))
+                .Returns((Product) null);
+            
+            //Act
+            var actual = controller.GetProductByIdDto(It.IsAny<int>());
+            //Assert
+            Assert.IsType<NotFoundResult> (actual.Result);
+        }
 
 
         #endregion
 
         #region Post Method
 
-        
 
         #endregion
         

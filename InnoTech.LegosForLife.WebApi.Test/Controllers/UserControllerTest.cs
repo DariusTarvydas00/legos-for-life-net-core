@@ -135,6 +135,21 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
             mockService.Verify(s => s.GetUsers(),Times.Once);
 
         }
+        
+        [Fact]
+        public void GetUserById_WithNotExistingItem_ReturnsNotFound()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var controller = new UserController(mockService.Object);
+            mockService.Setup(r => r.GetUserById(It.IsAny<int>()))
+                .Returns((User) null);
+            
+            //Act
+            var actual = controller.GetUserByIdDto(It.IsAny<int>());
+            //Assert
+            Assert.IsType<NotFoundResult> (actual.Result);
+        }
 
 
         #endregion

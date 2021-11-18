@@ -19,5 +19,10 @@ namespace InnoTech.LegosForLife.Domain.Services
         {
             return _adminService.FindAll();
         }
+
+        public Admin GetAdminById(int id)
+        {
+            return _adminService.GetAdminById(id);
+        }
     }
 }

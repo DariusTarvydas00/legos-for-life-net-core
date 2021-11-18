@@ -25,5 +25,14 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 Name = ae.Name
             }).ToList();
         }
+        
+        public Admin GetAdminById(int id)
+        {
+            return _ctx.Admins.Select(pe => new Admin()
+            {
+                Id = pe.Id,
+                Name = pe.Name
+            }).FirstOrDefault(admin => admin.Id == id);
+        }
     }
 }

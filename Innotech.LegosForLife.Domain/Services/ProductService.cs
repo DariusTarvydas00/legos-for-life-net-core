@@ -21,8 +21,7 @@ namespace InnoTech.LegosForLife.Domain.Services
 
         public Product GetProductById(int id)
         {
-            //throw new System.NotImplementedException();
-            return null;
+            return _productRepository.GetProductById(id);
         }
     }
 }

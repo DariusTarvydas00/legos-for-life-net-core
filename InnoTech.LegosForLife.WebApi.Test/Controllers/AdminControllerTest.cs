@@ -134,12 +134,26 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
             mockService.Verify(s => s.GetAdmins(),Times.Once);
 
         }
+        [Fact]
+        public void GetAdminById_WithNotExistingItem_ReturnsNotFound()
+        {
+            //Arrange
+            var mockService = new Mock<IAdminService>();
+            var controller = new AdminController(mockService.Object);
+            mockService.Setup(r => r.GetAdminById(It.IsAny<int>()))
+                .Returns((Admin) null);
+            
+            //Act
+            var actual = controller.GetAdminByIdDto(It.IsAny<int>());
+            //Assert
+            Assert.IsType<NotFoundResult> (actual.Result);
+        }
 
 
         #endregion
 
         #region Post Method
-
+        
         
 
         #endregion
