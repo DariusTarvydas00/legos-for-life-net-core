@@ -7,5 +7,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
     {
         List<Admin> FindAll();
         Admin GetAdminById(int Id);
+        Admin CreateNewAdmin(Admin admin);
     }
 }

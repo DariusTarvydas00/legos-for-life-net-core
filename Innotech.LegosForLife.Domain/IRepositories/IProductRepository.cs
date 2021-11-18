@@ -7,5 +7,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
     {
         List<Product> FindAll();
         Product GetProductById(int Id);
+        Product CreateNewProduct(Product product);
     }
 }

@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
 using InnoTech.LegosForLife.WebApi.DTOs;
+using InnoTech.LegosForLife.WebApi.DTOs.ProductDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoTech.LegosForLife.WebApi.Controllers
@@ -37,6 +39,24 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 });
             }
             return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult<PostProductDto> PostProductDto([FromBody]PostProductDto dto)
+        {
+            var productDto = new Product()
+            {
+                Name = dto.Name
+            };
+            try
+            {
+                var newProduct = _productService.CreateNewProduct(productDto);
+                return Created($"https://localhost:5001/api/videos/{newProduct.Id}", newProduct);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest();
+            }
         }
     }
 }

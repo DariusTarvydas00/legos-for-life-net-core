@@ -7,5 +7,6 @@ namespace InnoTech.LegosForLife.Domain.IRepositories
     {
         List<User> FindAll();
         User GetUserById(int Id);
+        User CreateNewUser(User user);
     }
 }

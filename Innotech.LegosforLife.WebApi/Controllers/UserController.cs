@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using InnoTech.LegosForLife.Core.IServices;
@@ -37,6 +38,24 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 });
             }
             return NotFound();
+        }
+        
+        [HttpPost]
+        public ActionResult<PostUserDto> PostUserDto([FromBody]PostUserDto dto)
+        {
+            var userDto = new User()
+            {
+                Name = dto.Name
+            };
+            try
+            {
+                var newUser = _userService.CreateNewUser(userDto);
+                return Created($"https://localhost:5001/api/videos/{newUser.Id}", newUser);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest();
+            }
         }
 
     }

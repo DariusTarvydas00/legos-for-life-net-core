@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using InnoTech.LegosForLife.Core.Models;
+using InnoTech.LegosForLife.DataAccess.Entities;
 using InnoTech.LegosForLife.Domain.IRepositories;
 
 namespace InnoTech.LegosForLife.DataAccess.Repositories
@@ -32,6 +33,21 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 Id = pe.Id,
                 Name = pe.Name
             }).FirstOrDefault(user => user.Id == id);
+        }
+
+        public User CreateNewUser(User user)
+        {
+            var entity = _ctx.Users.Add(new UserEntity()
+            {
+                Id = user.Id,
+                Name = user.Name
+            }).Entity;
+            _ctx.SaveChanges();
+            return new User()
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
         }
     }
 }

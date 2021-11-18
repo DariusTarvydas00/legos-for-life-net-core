@@ -8,5 +8,6 @@ namespace InnoTech.LegosForLife.Core.IServices
         List<Admin> GetAdmins();
 
         Admin GetAdminById(int id);
+        Admin CreateNewAdmin(Admin admin);
     }
 }

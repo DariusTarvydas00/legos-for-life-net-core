@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using InnoTech.LegosForLife.Core.IServices;
@@ -37,6 +38,24 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 });
             }
             return NotFound();
+        }
+        
+        [HttpPost]
+        public ActionResult<PostAdminDto> PostAdminDto([FromBody]PostAdminDto dto)
+        {
+            var adminDto = new Admin()
+            {
+                Name = dto.Name
+            };
+            try
+            {
+                var newAdmin = _adminService.CreateNewAdmin(adminDto);
+                return Created($"https://localhost:5001/api/videos/{newAdmin.Id}", newAdmin);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest();
+            }
         }
     }
 }
