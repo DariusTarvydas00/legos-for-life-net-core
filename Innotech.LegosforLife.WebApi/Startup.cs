@@ -61,8 +61,9 @@ namespace InnoTech.LegosForLife.WebApi
                 {
                   policy
                       .WithOrigins(
-                          "https://legosforlife2021.firebaseapp.com",
-                          "https://legosforlife2021.web.app")
+                          "https://dtlegosforlifedt-332510.firebaseapp.com",
+                          "https://dtlegosforlifedt.firebaseapp.com",
+                          "https://dtlegosforlifedt-332510.web.app")
                       .AllowAnyHeader()
                       .AllowAnyMethod();
                 } );
