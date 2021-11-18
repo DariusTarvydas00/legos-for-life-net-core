@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -6,6 +7,7 @@ using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
 using InnoTech.LegosForLife.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language;
 using Moq;
 using Xunit;
 
@@ -157,5 +159,14 @@ namespace InnoTech.LegosForLife.WebApi.Test.Controllers
         
 
         #endregion
+
+        private Admin CreateRandomAdmin()
+        {
+            return new Admin()
+            {
+                Id = 1,
+                Name = "Bob"
+            };
+        }
     }
 }
