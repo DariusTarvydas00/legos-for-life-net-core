@@ -15,6 +15,7 @@ namespace InnoTech.LegosForLife.Domain.Test
         private readonly ProductService _service;
         private readonly List<Product> _expected;
 
+        #region Initialization
         public ProductServiceTest()
         {
             _mock = new Mock<IProductRepository>();
@@ -50,8 +51,9 @@ namespace InnoTech.LegosForLife.Domain.Test
             );
             Assert.Equal("ProductRepository Cannot Be Null",exception.Message);
         }
+        #endregion
         
-        
+        #region GetAllProducts
         [Fact]
         public void GetProducts_CallsProductRepositoriesFindAll_ExactlyOnce()
         {
@@ -67,5 +69,18 @@ namespace InnoTech.LegosForLife.Domain.Test
             var actual = _service.GetProducts();
             Assert.Equal(_expected, actual);
         }
+        #endregion
+
+        #region GetProductById
+
+        [Fact]
+        public void GetProduct_ById_NullOrEmptyException()
+        {
+            var expected = _mock.Setup(r => r.GetProductById(1));
+           // Assert.Throws<InvalidDataException>(expected, _service.GetProductById(1), );
+        }
+
+
+        #endregion
     }
 }

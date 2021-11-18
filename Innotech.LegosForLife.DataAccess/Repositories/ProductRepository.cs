@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                     Name = pe.Name
                 })
                 .ToList();
+        }
+
+        public Product GetProductById(int Id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
