@@ -67,11 +67,17 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 return BadRequest();
             }
 
-            return Ok(_productService.UpdateProduct(new Product()
+            var dtoUpdate = _productService.GetProductById(dto.Id);
+
+            if (dtoUpdate is not null)
             {
-                Id = dto.Id,
-                Name = dto.Name
-            }));
+                return Ok(_productService.UpdateProduct(new Product()
+                {
+                    Id = dto.Id,
+                    Name = dto.Name
+                }));
+            }
+            return NotFound();
         }
         
         [HttpDelete]

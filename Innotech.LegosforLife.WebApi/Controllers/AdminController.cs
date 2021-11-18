@@ -66,11 +66,16 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 return BadRequest();
             }
 
-            return Ok(_adminService.UpdateAdmin(new Admin()
+            var dtoUpdate = _adminService.GetAdminById(dto.Id);
+            if (dtoUpdate is not null)
             {
-                Id = dto.Id,
-                Name = dto.Name
-            }));
+                return Ok(_adminService.UpdateAdmin(new Admin()
+                {
+                    Id = dto.Id,
+                    Name = dto.Name
+                }));
+            }
+            return NotFound();
         }
         
         [HttpDelete]

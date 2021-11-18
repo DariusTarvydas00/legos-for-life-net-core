@@ -5,7 +5,6 @@ using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
 using InnoTech.LegosForLife.WebApi.DTOs.UserDtos;
 using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
 
 namespace InnoTech.LegosForLife.WebApi.Controllers
 {
@@ -67,11 +66,17 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 return BadRequest();
             }
 
-            return Ok(_userService.UpdateUser(new User()
+            var dtoUpdate = _userService.GetUserById(dto.Id);
+            
+            if (dtoUpdate is not null)
             {
-                Id = dto.Id,
-                Name = dto.Name
-            }));
+                return Ok(_userService.UpdateUser(new User()
+                {
+                    Id = dto.Id,
+                    Name = dto.Name
+                }));
+            }
+            return NotFound();
         }
 
         [HttpDelete]

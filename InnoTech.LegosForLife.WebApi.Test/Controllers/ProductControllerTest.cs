@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +7,6 @@ using Xunit;
 using System.Reflection;
 using InnoTech.LegosForLife.Core.IServices;
 using InnoTech.LegosForLife.Core.Models;
-using InnoTech.LegosForLife.Domain.IRepositories;
 using Moq;
 
 namespace InnoTech.LegosForLife.WebApi.Test.Controllers

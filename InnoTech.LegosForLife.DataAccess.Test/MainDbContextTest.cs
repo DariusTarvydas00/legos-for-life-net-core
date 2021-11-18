@@ -1,5 +1,4 @@
 using EntityFrameworkCore.Testing.Moq;
-using InnoTech.LegosForLife.Core.Models;
 using InnoTech.LegosForLife.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
