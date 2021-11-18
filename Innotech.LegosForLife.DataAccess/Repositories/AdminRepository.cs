@@ -50,5 +50,20 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 Name = entity.Name
             };
         }
+
+        public Admin UpdateAdmin(Admin admin)
+        {
+            var entity = _ctx.Admins.Update(new AdminEntity()
+            {
+                Id = admin.Id,
+                Name = admin.Name
+            }).Entity;
+            _ctx.SaveChanges();
+            return new Admin()
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
+        }
     }
 }

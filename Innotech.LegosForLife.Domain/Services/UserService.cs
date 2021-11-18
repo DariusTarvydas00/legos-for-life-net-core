@@ -29,5 +29,10 @@ namespace InnoTech.LegosForLife.Domain.Services
         {
             return _userRepository.CreateNewUser(user);
         }
+
+        public User UpdateUser(User user)
+        {
+            return _userRepository.UpdateUser(user);
+        }
     }
 }

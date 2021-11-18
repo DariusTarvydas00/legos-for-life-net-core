@@ -49,5 +49,20 @@ namespace InnoTech.LegosForLife.DataAccess.Repositories
                 Name = entity.Name
             };
         }
+
+        public User UpdateUser(User user)
+        {
+            var entity = _ctx.Users.Update(new UserEntity()
+            {
+                Id = user.Id,
+                Name = user.Name
+            }).Entity;
+            _ctx.SaveChanges();
+            return new User()
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
+        }
     }
 }

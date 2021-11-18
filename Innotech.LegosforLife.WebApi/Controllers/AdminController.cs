@@ -57,5 +57,20 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpPut]
+        public ActionResult<PutAdminDto> PutAdminDto(int id, [FromBody] PutAdminDto dto)
+        {
+            if (id != dto.Id)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_adminService.UpdateAdmin(new Admin()
+            {
+                Id = dto.Id,
+                Name = dto.Name
+            }));
+        }
     }
 }

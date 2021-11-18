@@ -58,5 +58,20 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
             }
         }
 
+        [HttpPut]
+        public ActionResult<PutUserDto> PutUserDto(int id, [FromBody] PutUserDto dto)
+        {
+            if (id != dto.Id)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_userService.UpdateUser(new User()
+            {
+                Id = dto.Id,
+                Name = dto.Name
+            }));
+        }
+
     }
 }

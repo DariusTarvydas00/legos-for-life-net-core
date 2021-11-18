@@ -58,5 +58,20 @@ namespace InnoTech.LegosForLife.WebApi.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpPut]
+        public ActionResult<PutProductDto> PutProductDto(int id, [FromBody] PutProductDto dto)
+        {
+            if (id != dto.Id)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_productService.UpdateProduct(new Product()
+            {
+                Id = dto.Id,
+                Name = dto.Name
+            }));
+        }
     }
 }
